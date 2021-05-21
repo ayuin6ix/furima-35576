@@ -5,7 +5,7 @@
 | Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
 | nickname           | string              | null: false             |
-| email              | string              | null: false             |
+| email              | string              | null: false  unique: true            |
 | encrypted_password           | string              | null: false             |
 | family_name_kanji    | string              | null: false             |
 | first_name_kanji     | string              | null: false             |
@@ -29,8 +29,8 @@
 | status_id                              | integer     | null: false       |
 | prefecture_id                          | integer     | null: false       |
 | shipping_cost_id                       | integer    | null: false       |
-| shipping_days_id                       | integer    | null: false       |
-| user                             | reference     | null: false       |
+| shipping_day_id                       | integer    | null: false       |
+| user                             | reference     | null: false  foreign_key: true     |
 
 ### Association
 
@@ -41,8 +41,8 @@
 
 | Column      | Type       | Options           |
 |-------------|------------|-------------------|
-| user     | reference     | null: false       |
-| item     | reference     | null: false       |
+| user     | reference     | null: false  foreign_key: true     |
+| item     | reference     | null: false   foreign_key: true    |
 
 
 ### Association
@@ -61,9 +61,10 @@
 | address            | string              | null: false             |
 | building_name      | string                |                         |
 | phone_number       | integer             | null: false             |
+| order              | reference           | foreign_key: true       |
 
 
 ### Association
 
-- has_one :order
 - 
+- belongs_to :order
