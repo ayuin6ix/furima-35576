@@ -27,10 +27,10 @@
 | description                         | text       | null: false       |
 | price                               | integer    | null: false       |
 | status_id                              | integer     | null: false       |
-| prefecture                          | string     | null: false       |
+| prefecture_id                          | integer     | null: false       |
 | shipping_cost_id                       | integer    | null: false       |
 | shipping_days_id                       | integer    | null: false       |
-| user_id                             | reference     | null: false       |
+| user                             | reference     | null: false       |
 
 ### Association
 
@@ -41,8 +41,8 @@
 
 | Column      | Type       | Options           |
 |-------------|------------|-------------------|
-| user_id     | reference     | null: false       |
-| item_id     | reference     | null: false       |
+| user     | reference     | null: false       |
+| item     | reference     | null: false       |
 
 
 ### Association
@@ -56,7 +56,7 @@
 | Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
 | post_code          | string              | null: false             |
-| prefecture         | string              | null: false             |
+| prefecture_id         | integer             | null: false             |
 | city               | string              | null: false             |
 | address            | string              | null: false             |
 | building_name      | string                |                         |
