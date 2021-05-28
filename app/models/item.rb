@@ -11,12 +11,16 @@ class Item < ApplicationRecord
   belongs_to :shipping_day
 
   validates :name, :description, :price,  presence: true
+  # validates :price, inclusion: { in: [0-9] }
+  validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
 
+  with_options presence: true, numericality: { other_than: 1 } do
   
-  validates :category_id, numericality: { other_than: 1 } 
-  validates :status_id, numericality: { other_than: 1 } 
-  validates :shipping_cost_id, numericality: { other_than: 1 } 
-  validates :shipping_day_id, numericality: { other_than: 1 } 
-  validates :prefecture_id, numericality: { other_than: 1 } 
+  validates :category_id
+  validates :status_id
+  validates :shipping_cost_id
+  validates :shipping_day_id
+  validates :prefecture_id
+  end
 
 end
