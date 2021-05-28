@@ -85,7 +85,7 @@ RSpec.describe Item, type: :model do
       it "半角英数混合では登録できない" do
         @item.price = 'a1a1'
         @item.valid?
-        binding.pry
+        
         expect(@item.errors.full_messages).to include("Price is invalid")
       end
       it "半角英語だけでは登録できない" do
