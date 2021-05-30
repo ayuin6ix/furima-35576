@@ -6,7 +6,7 @@ RSpec.describe Item, type: :model do
   end
 
   describe '出品登録' do
-    context '出品登録登録がうまくいくとき' do
+    context '出品登録がうまくいくとき' do
       it '全ての項目の入力が存在すれば登録できること' do
 
         expect(@item).to be_valid
@@ -15,7 +15,7 @@ RSpec.describe Item, type: :model do
        
     end
 
-    context '新規登録がうまくいかないとき' do
+    context '出品登録がうまくいかないとき' do
       
       it "商品名がないと登録できない" do
         @item.name = ''
@@ -108,6 +108,11 @@ RSpec.describe Item, type: :model do
         @item.price = 100000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid")
+      end
+      it "画像が空の場合登録できないこと" do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
       end
 
       
