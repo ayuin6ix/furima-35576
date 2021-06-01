@@ -40,11 +40,12 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+
+    unless @item.user_id == current_user.id
+      redirect_to root_path
   end
 
-  def move_to_index
-    redirect_to new_user_session_path unless user_signed_in?
-  end
+  
 
 
   private
