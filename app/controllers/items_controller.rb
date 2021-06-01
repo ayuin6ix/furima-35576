@@ -1,11 +1,14 @@
 class ItemsController < ApplicationController
-  before_action :set_prototype, except: [:index, :new, :create]
+  before_action :set_item, except: [:index, :new, :create]
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :move_to_index, except: [:index, :show]
   
 
   def index
     @items = Item.all.order('created_at DESC')
+    
   end
+ 
 
   def new
     @item = Item.new
@@ -26,6 +29,9 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    unless @item.user_id == current_user.id
+      redirect_to root_path
+    end
   end
 
   def update
@@ -36,6 +42,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def move_to_index
+    redirect_to new_user_session_path unless user_signed_in?
+  end
+
+
   private
 
   def item_params
@@ -43,9 +54,10 @@ class ItemsController < ApplicationController
                                  :prefecture_id, :price).merge(user_id: current_user.id)
   end
 
-  def set_prototype
+  def set_item
     @item = Item.find(params[:id])
   end
 
-  
 end
+
+
